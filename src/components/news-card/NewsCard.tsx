@@ -1,5 +1,4 @@
 import React from "react";
-import {Card, CardContent, CardMedia, Typography} from "@material-ui/core";
 import './NewsCard.css';
 
 interface NewsCardProps {
@@ -11,17 +10,12 @@ interface NewsCardProps {
 };
 
 const NewsCard: React.FC<NewsCardProps> = (props: NewsCardProps) => {
-    return (<Card>
-        <CardMedia image={props.imageUrl}className={"NewsCardSize"}/>
-        <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-                {props.title}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-                {props.descripiton}
-            </Typography>
-        </CardContent>
-    </Card>);
+    return <div className={"NewsCard"}>
+        <img src={props.imageUrl} alt="" className={"NewsImage"}/>
+        <h2>{props.title}</h2>
+        <h5 className={"NewsAuthor"}>{props.author}</h5>
+        <p>{props.descripiton}</p>
+    </div>
 }
 
 export default NewsCard;

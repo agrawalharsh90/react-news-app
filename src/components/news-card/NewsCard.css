@@ -13,6 +13,6 @@
 }
 
 .NewsAuthor {
-    alignment: right;
     color: grey;
+    text-align: right;
 }

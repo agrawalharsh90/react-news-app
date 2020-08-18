@@ -2,9 +2,12 @@ import React from "react";
 import NewsCard from "../news-card/NewsCard";
 import "./NewsGridView.scss";
 
+interface NewsGridViewProps{
+
+}
 const NewsGridView: React.FC = () => {
   return (
-    <div className={"NewsGridViewTop"}>
+    <div className={"newsGridViewTop"}>
       {[...Array(10)].map((item) => (
         <NewsCard
           imageUrl={

@@ -1,35 +1,48 @@
 import React from "react";
-import './NewsCard.css';
+import "./NewsCard.scss";
+import {Box, Card, CardContent, CardMedia, Tooltip, Typography,} from "@material-ui/core";
 
 interface NewsCardProps {
-    id: string,
-    imageUrl: string,
-    title: string,
-    descripiton: string,
-    author: string,
-};
+    id: string;
+    imageUrl: string;
+    title: string;
+    descripiton: string;
+    author: string;
+}
 
 const NewsCard: React.FC<NewsCardProps> = (props: NewsCardProps) => {
-    return <div className={"NewsCard"}>
-        <img src={props.imageUrl} alt="" className={"NewsImage"}/>
-        <h2>{props.title}</h2>
-        <h5 className={"NewsAuthor"}>{props.author}</h5>
-        <p>{props.descripiton}</p>
-    </div>
-
-    // return <Card>
-    //     <CardActionArea>
-    //         <CardMedia image={props.imageUrl}className={"NewsCard"}/>
-    //         <CardContent>
-    //             <Typography gutterBottom variant="h5" component="h2">
-    //                 {props.title}
-    //             </Typography>
-    //             <Typography variant="body2" color="textSecondary" component="p">
-    //                 {props.descripiton}
-    //             </Typography>
-    //         </CardContent>
-    //     </CardActionArea>
-    // </Card>;
-}
+    return (
+        <Box className={"article-card-container"} key={props.id}>
+            <Card style={{height: "100%"}}>
+                <CardMedia image={props.imageUrl}/>
+                <Tooltip
+                    placement={"top"}
+                    title={<Typography variant={"h5"}>{props.title || ""}</Typography>}
+                >
+                    <CardContent
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "space-between",
+                            height: "40%",
+                        }}
+                    >
+                        <div>
+                            <Typography variant={"h4"} color={"secondary"}>
+                                {props.title}
+                            </Typography>
+                            <Typography variant={"h5"}>
+                                Source: {props.descripiton}
+                            </Typography>
+                        </div>
+                        <Typography variant={"h6"} align={"right"}>
+                            By {props.author}
+                        </Typography>
+                    </CardContent>
+                </Tooltip>
+            </Card>
+        </Box>
+    );
+};
 
 export default NewsCard;

@@ -1,0 +1,11 @@
+.article-card-container {
+    height: 100%;
+    cursor: pointer;
+  
+    .MuiCardMedia-root {
+      height: 13em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }

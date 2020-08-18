@@ -1,0 +1,9 @@
+.dashboard-parent-container {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+  
+    .route-content {
+      height: calc(100vh - 4em);
+    }
+  }

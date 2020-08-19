@@ -4,17 +4,17 @@ import {Box, Card, CardContent, CardMedia, Tooltip, Typography,} from "@material
 
 interface NewsCardProps {
     id: string;
-    imageUrl: string;
-    title: string;
-    descripiton: string;
-    author: string;
+    imageUrl?: string;
+    title?: string;
+    descripiton?: string;
+    author?: string;
 }
 
 const NewsCard: React.FC<NewsCardProps> = (props: NewsCardProps) => {
     return (
         <Box className={"article-card-container"} key={props.id}>
             <Card style={{height: "100%"}}>
-                <CardMedia image={props.imageUrl}/>
+                <CardMedia image={props.imageUrl ?? "https://image.shutterstock.com/image-vector/breaking-news-background-world-global-260nw-720038230.jpg"}/>
                 <Tooltip
                     placement={"top"}
                     title={<Typography variant={"h5"}>{props.title || ""}</Typography>}

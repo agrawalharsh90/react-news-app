@@ -9,7 +9,7 @@ class NewsService {
 
   async getNews(apikey: string): Promise<NewsModel[]> {
     return await apiService
-      .get<NewsModel[]>(`everything?apikey=${apikey}`)
+      .get<NewsModel[]>(`top-headlines?country=in&apikey=${apikey}`)
       .then((res: any) => {
         return res.data.articles.map((article: any) => {
           return {

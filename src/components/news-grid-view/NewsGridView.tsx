@@ -1,26 +1,34 @@
-import React from "react";
+import React, {useEffect} from "react";
 import NewsCard from "../news-card/NewsCard";
 import "./NewsGridView.scss";
+import {GlobalProps} from "../../App";
+import {inject, observer} from "mobx-react";
 
-interface NewsGridViewProps{
 
-}
-const NewsGridView: React.FC = () => {
-  return (
-    <div className={"newsGridViewTop"}>
-      {[...Array(10)].map((item) => (
-        <NewsCard
-          imageUrl={
-            "https://image.shutterstock.com/image-vector/breaking-news-background-world-global-260nw-720038230.jpg"
-          }
-          title={"Sample News"}
-          author={"Sample"}
-          descripiton={"This is sample News for Ui Testing"}
-          id={"1"}
-        />
-      ))}
-    </div>
-  );
+const NewsGridView: React.FC<GlobalProps> = (props: GlobalProps) => {
+    const newsStore = props.store?.news;
+
+    useEffect(() => {
+        newsStore?.getNews();
+    }, []);
+    // if (props.isLoading != null && props.isLoading)
+    //     return <span>Loading...</span>;
+    // if(props.newsList.length<1)
+    //     return <span>Sorry Unable To Load...</span>
+    return (
+        <div className={"newsGridViewTop"}>
+            {newsStore?.entities.map((item) => (
+                <NewsCard
+                    key={item.id}
+                    imageUrl={item.urlToImage}
+                    id={item.id}
+                    title={item.title}
+                    author={item.author}
+                    descripiton={item.description}
+                />
+            ))}
+        </div>
+    );
 };
 
-export default NewsGridView;
+export default inject('store')(observer(NewsGridView)); ;

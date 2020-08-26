@@ -3,7 +3,7 @@ import "./NewsCard.scss";
 import {Box, Card, CardContent, CardMedia, Tooltip, Typography,} from "@material-ui/core";
 
 interface NewsCardProps {
-    id: string;
+    id: string | number;
     imageUrl?: string;
     title?: string;
     descripiton?: string;

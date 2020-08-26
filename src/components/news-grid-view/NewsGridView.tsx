@@ -1,23 +1,25 @@
-import React from "react";
+import React, {useEffect} from "react";
 import NewsCard from "../news-card/NewsCard";
 import "./NewsGridView.scss";
-import {NewsModel} from "../../models/NewsModel";
+import {GlobalProps} from "../../App";
+import {inject, observer} from "mobx-react";
 
-interface NewsGridViewProps {
-    isLoading: boolean,
-    newsList: NewsModel[]
-}
 
-const NewsGridView: React.FC<NewsGridViewProps> = (props: NewsGridViewProps) => {
-    if (props.isLoading != null && props.isLoading)
-        return <span>Loading...</span>;
-    if(props.newsList.length<1)
-        return <span>Sorry Unable To Load...</span>
+const NewsGridView: React.FC<GlobalProps> = (props: GlobalProps) => {
+    const newsStore = props.store?.news;
+
+    useEffect(() => {
+        newsStore?.getNews();
+    }, []);
+    // if (props.isLoading != null && props.isLoading)
+    //     return <span>Loading...</span>;
+    // if(props.newsList.length<1)
+    //     return <span>Sorry Unable To Load...</span>
     return (
         <div className={"newsGridViewTop"}>
-            {props.newsList.map((item) => (
+            {newsStore?.entities.map((item) => (
                 <NewsCard
-                    key = {item.id}
+                    key={item.id}
                     imageUrl={item.urlToImage}
                     id={item.id}
                     title={item.title}
@@ -29,4 +31,4 @@ const NewsGridView: React.FC<NewsGridViewProps> = (props: NewsGridViewProps) => 
     );
 };
 
-export default NewsGridView;
+export default inject('store')(observer(NewsGridView)); ;
